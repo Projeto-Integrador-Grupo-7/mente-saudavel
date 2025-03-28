@@ -3,8 +3,7 @@
 import os
 import sys
 
-# teste
-
+# teste de commit
 
 def main():
     """Run administrative tasks."""
