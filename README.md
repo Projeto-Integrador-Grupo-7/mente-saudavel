@@ -1,25 +1,25 @@
 # Sistema Mente Saudável
 
-# Instalar:
+## Instalar:
 ```
 pip install django
 
 pip install mysqlclient
 ```
 
-# Criar banco:
+## Criar banco:
 ```
 CREATE DATABASE mente_saudavel CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-# Migrations:
+## Migrations:
 ```
 python manage.py makemigrations nome_do_app --name nome_da_migration
 
 python manage.py migrate
 ```
 
-# Rodar aplicação:
+## Rodar aplicação:
 ```
 python manage.py runserver
 ```
