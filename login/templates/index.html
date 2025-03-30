@@ -1,0 +1,8 @@
+<h1>Página de Login</h1>
+
+<form action="{% url 'login' %}" method="post"> {% csrf_token %}
+    <input type="text" name="email" placeholder="Email" required>
+    <input type="text" name="senha" placeholder="Senha" required>
+
+    <input type="submit" value="Entrar">
+</form>
