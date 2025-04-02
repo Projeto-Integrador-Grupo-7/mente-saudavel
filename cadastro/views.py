@@ -1,6 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from usuario.models import Usuario
+from django.shortcuts import render, redirect
+from django.contrib.auth import get_user_model
 
 def cadastro(request):
     if request.method == 'GET':
@@ -12,14 +11,14 @@ def cadastro(request):
         data_nascimento = request.POST.get('data_nascimento')
         sexo = request.POST.get('sexo')
 
-        usuario = Usuario(
-            nome=nome,
-            senha=senha,
+        User = get_user_model()
+
+        User.objects.create_user(
             email=email,
+            password=senha,
+            nome=nome,
             data_nascimento=data_nascimento,
             sexo=sexo
         )
 
-        usuario.save()
-
-        return HttpResponse(nome)
+        return redirect('login_usuario')

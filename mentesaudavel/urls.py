@@ -19,9 +19,11 @@ from django.urls import path, include
 
 import login.urls
 import cadastro.urls
+import home.urls
 
 urlpatterns = [
     path('', include(login.urls)),
     path('admin/', admin.site.urls),
     path('cadastro/', include(cadastro.urls)),
+    path('home/', include(home.urls))
 ]

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h1>Login</h1>
+
+<form action="{% url 'login_usuario' %}" method="post"> {% csrf_token %}
+    <input type="text" name="email" placeholder="Email" required>
+    <input type="text" name="senha" placeholder="Senha" required>
+
+    <a href="{% url 'cadastro_usuario' %}">Cadastrar-se</a>
+
+    <input type="submit" value="Entrar">
+</form>
+{% if user.is_authenticated %}
+    <script>
+        window.location.href = "{% url 'home' %}";
+    </script>
+{% endif %}
+{% endblock %}
