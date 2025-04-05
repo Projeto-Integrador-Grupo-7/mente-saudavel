@@ -22,8 +22,8 @@ import cadastro.urls
 import home.urls
 
 urlpatterns = [
-    path('', include(login.urls)),
+    path('', include(home.urls)),
     path('admin/', admin.site.urls),
     path('cadastro/', include(cadastro.urls)),
-    path('home/', include(home.urls))
+    path('login/', include(login.urls)),
 ]

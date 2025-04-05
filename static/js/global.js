@@ -1,7 +1,7 @@
 var timeout;
 
 function logout() {
-    window.location.href = "{% url 'logout_usuario' %}";
+    window.location.href = urlLogout;
 }
 
 function resetTimer() {

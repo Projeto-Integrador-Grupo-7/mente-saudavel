@@ -32,6 +32,10 @@
         {% block content %}
         {% endblock %}
     </main>
+
+    <script>
+        var urlLogout = "{% url 'logout_usuario' %}";
+    </script>
     <script src="{% static 'js/global.js' %}"></script>
 </body>
 </html>

@@ -17,8 +17,5 @@ def login_usuario(request):
             return HttpResponse("Email ou Senha inválidos.")
         
 def logout_usuario(request):
-    if request.method == 'POST':
-        logout(request)
-        return redirect('login_usuario')
-    
-    return redirect('home')  
+    logout(request)
+    return redirect('login_usuario')
