@@ -1,11 +1,22 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}Página Inicial{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
 
 <h1>Página Inicial</h1>
 <br>
-<h2>Bem vindo ao sistema Mente Saudável!</h2>
+<div class="home-container">
+    <h2>Bem vindo {{user.nome}}, esse é o sistema Mente Saudável!</h2>
+    <p>
+        O sistema tem como objetivo monitorar a saúde mental dos trabalhadores empregando 
+        o <strong>questionário Self-Reporting Questionnaire-20 (SRQ-20)</strong>, sinta-se a vontade para respondê-lo. 
+        <br>
+        As respostas serão utilizadas em relatórios, médias e gráficos para análise de métricas, 
+        porém <strong>seu nome não será divulgado</strong> aos outros usuários.
+    </p>
+</div>
 
 {% endblock %}
