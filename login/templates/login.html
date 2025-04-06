@@ -1,18 +1,49 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1>Login</h1>
+<link rel="stylesheet" href="{% static 'login.css' %}">
 
-<form action="{% url 'login_usuario' %}" method="post"> {% csrf_token %}
-    <input type="text" name="email" placeholder="Email" required>
-    <input type="text" name="senha" placeholder="Senha" required>
+<div class="login-container">
+    <h1>Login</h1>
 
-    <a href="{% url 'cadastro_usuario' %}">Cadastrar-se</a>
+    <form action="{% url 'login_usuario' %}" method="post"> {% csrf_token %}
+        <div class="mb-3">
+            <label for="txt_email" class="form-label">Email</label>
+            <input type="email" id="txt_email" name="email" class="form-control" required>
+        </div>
+    
+        <div class="mb-3">
+            <label for="txt_senha" class="form-label">Senha</label>
+            <input type="password" id="txt_senha" name="senha" class="form-control" required>
+        </div>
+    
+        <!-- Em desenvolvimento -->
+        <div class="opcoes-extras-container">
+            <!-- <div class="mb-3 form-check" style="user-select: none;">
+                <input type="checkbox" class="form-check-input" id="cbx_manter_logado">
+                <label class="form-check-label" for="cbx_manter_logado">Manter-me logado</label>
+            </div> -->
 
-    <input type="submit" value="Entrar">
-</form>
+            <!-- <div class="mb-3 form-check">
+                <a href="{% url 'cadastro_usuario' %}">Esqueci minha senha</a>
+            </div> -->
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+    
+    <div style="text-align: right;">
+        <span>
+            Ainda não tem conta?
+            <a href="{% url 'cadastro_usuario' %}">Cadastre-se</a>
+        </span>
+    </div>
+</div>
+
+
 {% if user.is_authenticated %}
     <script>
         window.location.href = "{% url 'home' %}";

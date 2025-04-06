@@ -1,0 +1,44 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(20, 85, 139, 0.8); /* Caso navegador não tenha suporte pro degradê */
+    background: linear-gradient(to bottom left, rgba(20, 85, 139, 0.9), rgba(115, 186, 245, 0.7));
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-bottom: 1rem;
+}
+
+button[type="submit"] {
+    width: 100%;
+    background-color: #14558B;
+    border: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #2380cc;
+    border: none;
+}
+
+span {
+    color: #707070;
+}
+
+.login-container {
+    height: 25rem;
+    width: 30rem;
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transform: translateY(-6rem);
+}
+
+.opcoes-extras-container {
+    display: flex;
+    justify-content: space-between;
+}

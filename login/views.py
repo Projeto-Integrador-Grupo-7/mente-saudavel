@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 def login_usuario(request):
     if request.method == 'GET':
-        return render(request, 'login.html')
+        return render(request, 'login.html', {'esconder_botoes': True})
     else:
         email = request.POST.get('email')
         senha = request.POST.get('senha')

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 def cadastro(request):
     if request.method == 'GET':
-        return render(request, 'usuario.html')
+        return render(request, 'usuario.html', {'esconder_botoes': True})
     else:
         nome = request.POST.get('nome')
         email = request.POST.get('email')
@@ -21,4 +21,4 @@ def cadastro(request):
             sexo=sexo
         )
 
-        return redirect('login_usuario')
+        return redirect('login_usuario', {'esconder_botoes': True})

@@ -1,4 +1,10 @@
-<h1>Cadastro de Usuario</h1>
+{% extends 'layout.html' %}
+
+{% block title %}Cadastrar-se{% endblock %}
+
+{% block content %}
+
+<h1>Cadastrar-se</h1>
 
 <form action="{% url 'cadastro_usuario' %}" method="post"> {% csrf_token %}
     <input type="text" name="nome" placeholder="Nome" required>
@@ -9,3 +15,5 @@
 
     <input type="submit" value="Salvar">
 </form>
+
+{% endblock %}
