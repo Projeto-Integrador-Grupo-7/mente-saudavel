@@ -47,11 +47,3 @@ span {
     user-select: none;
     width: 13rem;
 }
-
-.alert-overlay {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-}
