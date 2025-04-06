@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 def cadastro(request):
     if request.method == 'GET':
-        return render(request, 'usuario.html', {'esconder_botoes': True})
+        return render(request, 'cadastro.html', {'esconder_botoes': True})
     else:
         nome = request.POST.get('nome')
         email = request.POST.get('email')
@@ -13,12 +13,19 @@ def cadastro(request):
 
         User = get_user_model()
 
-        User.objects.create_user(
-            email=email,
-            password=senha,
-            nome=nome,
-            data_nascimento=data_nascimento,
-            sexo=sexo
-        )
+        try:
+            User.objects.create_user(
+                email=email,
+                password=senha,
+                nome=nome,
+                data_nascimento=data_nascimento,
+                sexo=sexo
+            )
 
-        return redirect('login_usuario', {'esconder_botoes': True})
+            return redirect('login_usuario')
+        
+        except Exception:
+            return render(request, 'cadastro.html', {
+                'esconder_botoes': True,
+                'error': 'Não foi possível cadastrar o usuário.'
+            })

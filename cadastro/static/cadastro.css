@@ -1,5 +1,6 @@
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgba(20, 85, 139, 0.8); /* Caso navegador não tenha suporte pro degradê */
@@ -11,6 +12,8 @@ h1 {
 }
 
 form {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 1rem;
 }
 
@@ -29,15 +32,26 @@ span {
     color: #707070;
 }
 
-.login-container {
+.cadastro-container {
     width: 30rem;
     background-color: #ffffff;
     border-radius: 1.5rem;
     padding: 2rem;
-    transform: translateY(-6rem);
+    transform: translateY(-4rem);
 }
 
-.opcoes-extras-container {
+.radio-button-container {
     display: flex;
     justify-content: space-between;
+    align-self: flex-end;
+    user-select: none;
+    width: 13rem;
+}
+
+.alert-overlay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
 }
