@@ -10,7 +10,7 @@ header {
     background-color: #14558B;
 }
 
-header a, 
+header a,
 header span {
     color: white !important;
 }
@@ -26,6 +26,10 @@ main {
 
 #dpdUsuario {
     color: white;
+}
+
+a.navbar-brand {
+    font-size: 1.5rem;
 }
 
 .alert-overlay {
