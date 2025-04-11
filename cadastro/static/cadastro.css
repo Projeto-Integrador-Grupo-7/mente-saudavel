@@ -1,0 +1,49 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(20, 85, 139, 0.8); /* Caso navegador não tenha suporte pro degradê */
+    background: linear-gradient(to bottom left, rgba(20, 85, 139, 0.9), rgba(115, 186, 245, 0.7));
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+button[type="submit"] {
+    width: 100%;
+    background-color: #14558B;
+    border: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #2380cc;
+    border: none;
+}
+
+span {
+    color: #707070;
+}
+
+.cadastro-container {
+    width: 30rem;
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transform: translateY(-4rem);
+}
+
+.radio-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-self: flex-end;
+    user-select: none;
+    width: 13rem;
+}

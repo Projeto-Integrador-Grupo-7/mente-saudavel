@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'cadastro.css' %}">
+
+<!-- Alerta provisório -->
+{% if error %}
+<div role="alert" class="alert alert-danger alert-overlay">{{ error }}</div>
+{% endif %}
+
+<div class="cadastro-container">
+    <h1>Cadastrar-se</h1>
+
+    <form action="{% url 'cadastro_usuario' %}" method="post"> {% csrf_token %}
+        <div class="mb-3">
+            <label for="txtNome" class="form-label">Nome</label>
+            <input type="text" id="txtNome" name="nome" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="txtEmail" class="form-label">Email</label>
+            <input type="email" id="txtEmail" name="email" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="txtSenha" class="form-label">Senha</label>
+            <input type="password" id="txtSenha" name="senha" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="dtpDataNascimento" class="form-label">Data Nascimento</label>
+            <input type="date" id="dtpDataNascimento" name="data_nascimento" class="form-control" required>
+        </div>
+
+        <div class="radio-button-container mb-3">
+            <div class="form-check">
+                <input type="radio" id="radMasculino" name="sexo" value="M" class="form-check-input" checked>
+                <label for="radMasculino" class="form-check-label">Masculino</label>
+            </div>
+    
+            <div class="form-check">
+                <input type="radio" id="radFeminino" name="sexo" value="F" class="form-check-input">
+                <label for="radFeminino" class="form-check-label">Feminino</label>
+            </div>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+
+    <div style="text-align: right;">
+        <span>
+            Já possui uma conta?
+            <a href="{% url 'login_usuario' %}">Logar</a>
+        </span>
+    </div>
+</div>
+
+{% endblock %}

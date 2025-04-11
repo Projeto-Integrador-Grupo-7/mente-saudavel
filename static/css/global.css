@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    height: 4rem;
+    align-content: center;
+    background-color: #14558B;
+}
+
+header a,
+header span {
+    color: white !important;
+}
+
+main {
+    flex: 1;
+}
+
+#navbarNav {
+    display: flex;
+    justify-content: space-between;
+}
+
+#dpdUsuario {
+    color: white;
+}
+
+a.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.alert-overlay {
+    position: absolute;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
