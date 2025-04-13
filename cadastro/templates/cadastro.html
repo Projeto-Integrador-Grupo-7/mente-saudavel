@@ -5,6 +5,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'cadastro.css' %}">
+<script src="{% static '/cadastro-validation.js' %}" defer></script>
 
 <!-- Alerta provisório -->
 {% if error %}
@@ -23,16 +24,38 @@
         <div class="mb-3">
             <label for="txtEmail" class="form-label">Email</label>
             <input type="email" id="txtEmail" name="email" class="form-control" required>
+            <span id="email-feedback" class="email-feedback" style="display: none;">
+                Email deve conter "@" e um domínio válido.
+            </span>
         </div>
+
+        <div class="mb-3 position-relative">
+            <label for="txtPassword" class="form-label">Senha</label>
+            <input type="password" id="txtPassword" name="senha" class="form-control" required>
+        
+            <!-- Card flutuante com regras -->
+            <div id="password-card" class="password-card">
+                <ul id="password-rules" class="mt-2 mb-0">
+                    <li id="length" class="invalid">Mínimo de 8 caracteres</li>
+                    <li id="uppercase" class="invalid">Pelo menos uma letra maiúscula</li>
+                    <li id="lowercase" class="invalid">Pelo menos uma letra minúscula</li>
+                    <li id="number" class="invalid">Pelo menos um número</li>
+                    <li id="symbol" class="invalid">Pelo menos um símbolo</li>
+                </ul>
+            </div>
+        </div>     
+
+        <p id="password-feedback" class="password-feedback">
+        </p>
 
         <div class="mb-3">
-            <label for="txtSenha" class="form-label">Senha</label>
-            <input type="password" id="txtSenha" name="senha" class="form-control" required>
+            <label for="txtTestPassword" class="form-label">Confirme a Senha</label>
+            <input type="password" id="txtTestPassword" name="confirmar_senha" class="form-control" required>
         </div>
-
+        
         <div class="mb-3">
             <label for="dtpDataNascimento" class="form-label">Data Nascimento</label>
-            <input type="date" id="dtpDataNascimento" name="data_nascimento" class="form-control" required>
+            <input type="date" id="dtpDataNascimento" name="data_nascimento" class="form-control" required max="">
         </div>
 
         <div class="radio-button-container mb-3">
@@ -46,8 +69,8 @@
                 <label for="radFeminino" class="form-check-label">Feminino</label>
             </div>
         </div>
-    
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+
+        <button type="submit" class="btn btn-primary" disabled>Cadastrar</button>
     </form>
 
     <div style="text-align: right;">

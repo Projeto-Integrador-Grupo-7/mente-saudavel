@@ -21,6 +21,7 @@ import login.urls
 import cadastro.urls
 import home.urls
 import questionario.urls
+import dashboard.urls
 
 urlpatterns = [
     path('', include(home.urls)),
@@ -28,4 +29,5 @@ urlpatterns = [
     path('cadastro/', include(cadastro.urls)),
     path('login/', include(login.urls)),
     path('questionario/', include('questionario.urls')),
+    path('dashboard/', include(dashboard.urls)),
 ]

@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
+<div class="filter-container">
+    <form id="filter-form" method="GET">
+        <div class="filter-campos">
+            <div class="mb-3">
+                <label for="filterDataInicio" class="form-label">Início do Período</label>
+                <input type="date" id="filterDataInicio" name="dataInicio" class="form-control" value="{{ filtros.data_inicio }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="filterDataFim" class="form-label">Fim do Período</label>
+                <input type="date" id="filterDataFim" name="dataFim" class="form-control" value="{{ filtros.data_fim }}">
+            </div>
+
+            <div class="mb-3">
+                <label for="filterSexo" class="form-label">Sexo</label>
+                <select id="filterSexo" name="sexo" class="form-select">
+                    <option value="" {% if not filtros.sexo %}selected{% endif %}>
+                        Selecione
+                    </option>
+                    <option value="M" {% if filtros.sexo == "M" %}selected{% endif %}>
+                        Masculino
+                    </option>
+                    <option value="F" {% if filtros.sexo == "F" %}selected{% endif %}>
+                        Feminino
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="filterIdade" class="form-label">Idade</label>
+                <input type="number" id="filterIdade" name="idade" class="form-control" placeholder="Idade" min="0" value="{{ filtros.idade }}">
+            </div>
+
+            <div class="filter-buttons">
+                <button type="reset" id="btnLimpar" class="btn btn-secondary">Limpar</button>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<h1>Dashboard</h1>
+
+<div class="container-principal">
+    <div class="historico-container table-responsive-sm">
+        <h3>Histórico</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Estratificação</th>
+                    <th scope="col">Pontuação</th>
+                    <th scope="col">Data</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for historico in historico_dados %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ historico.estratificacao }}</td>
+                    <td>{{ historico.pontuacao }}</td>
+                    <td>{{ historico.data }}</td>
+                    <td>
+                        <button onclick="window.location.href='/'" class="btn btn-primary">Visualizar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="grafico-container">
+        <h3>Resultado Geral</h3>
+        <h4>Respostas: {{ grafico_dados.participantes }}</h4>
+        <canvas id="graficoPizza" width="500px" height="350px"></canvas>
+    </div>
+</div>
+
+{{ historicoDados|json_script:"historicoDadosJson" }}
+{{ grafico_dados|json_script:"graficoDadosJson" }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script src="{% static 'dashboard.js' %}"></script>
+{% endblock %}
