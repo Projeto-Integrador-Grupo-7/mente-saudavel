@@ -7,14 +7,32 @@
 <link rel="stylesheet" href="{% static 'home.css' %}">
 
 <div class="home-container">
-    <h2>Bem vindo {{user.nome}}, esse é o sistema Mente Saudável!</h2>
+    <h2>Bem-vindo {{ user.nome }}, esse é o sistema Mente Saudável!</h2>
     <p>
         O sistema tem como objetivo monitorar a saúde mental dos trabalhadores empregando 
-        o <strong>questionário Self-Reporting Questionnaire-20 (SRQ-20)</strong>, sinta-se a vontade para respondê-lo. 
+        o <strong>questionário Self-Reporting Questionnaire-20 (SRQ-20)</strong>, sinta-se à vontade para respondê-lo. 
         <br>
         As respostas serão utilizadas em relatórios, médias e gráficos para análise de métricas, 
         porém <strong>seu nome não será divulgado</strong> aos outros usuários.
     </p>
-</div>
+
+    <div class="cards-container">
+        <div class="card">
+            <h3>Responder Questionário</h3>
+            <p>Participe da autoavaliação de saúde mental com o SRQ-20.</p>
+            <a href="{% url 'questionario' %}" class="card-btn">Responder</a>
+        </div>
+        <div class="card">
+            <h3>Ver Resultados</h3>
+            <p>Consulte seus relatórios e acompanhe sua evolução.</p>
+            <a href="{% url 'resultado' %}" class="card-btn">Ver Resultados</a>
+        </div>
+        <div class="card">
+            <h3>Dashboard</h3>
+            <p>Acompanhe seu progresso, veja estatísticas e relatórios personalizados.</p>
+            <a href="{% url 'dashboard' %}" class="card-btn">Ajustar</a>
+        </div>
+    </div>
+</div
 
 {% endblock %}
