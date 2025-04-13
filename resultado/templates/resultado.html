@@ -1,103 +1,18 @@
 {% extends 'layout.html' %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'resultado.css' %}">
 
 <body>
-
-    <style>
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        .slider-container {
-            width: 80%;
-            margin: 30px auto;
-            text-align: center;
-        }
-
-        .slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to right, #00e600 40%, #ccc 40%);
-            border-radius: 10px;
-            outline: none;
-            transition: background 450ms ease-in;
-            position: relative;
-        }
-
-
-        /* thumb */
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-
-        .emojis {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 22px;
-        }
-
-        .resultConainer {
-            width: 80%;
-            margin: 50px auto;
-            height: 290px;
-        }
-
-        .resultConainer>p {
-            margin-top: 50px;
-            overflow-y: auto;
-            max-height: 270px;
-        }
-
-        .containerBtns {
-            width: 80%;
-            margin: 30px auto;
-            text-align: center;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .containerBtns>button {
-            margin-top: 10px;
-            background-color: #14558B;
-            border: none;
-            border-radius: 15px;
-            color: white;
-            width: 30%;
-            text-align: center;
-            padding: 10px;
-            cursor: pointer;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transition: box-shadow 0.3s ease;
-            font-size: 17px;
-        }
-    </style>
-
     <section>
 
         <h1>Seu resultado</h1>
 
         <div class="slider-container">
-            <input type="range" min="1" max="5" value="2" class="slider" id="feelingRange" onchange="changeColor()"
+            <input type="range" min="0" max="20" value="{{ pontuacao }}" class="slider" id="feelingRange" onchange="changeColor()"
                 disabled="true">
             <div class="emojis">
                 <span>😁</span>
@@ -124,27 +39,20 @@
         </div>
 
         <div class="containerBtns">
-            <button>Voltar para o menu</button>
-            <button>Dashboard</button>
+            <button onclick="redirectHome()">Voltar para página inicial</button>
+            <button onclick="redirectDashboard()">Ir para Dashboard</button>
         </div>
     </section>
 
     <script>
-        const slider = document.getElementById('feelingRange');
-
-        function changeColor() {
-
-            const value = slider.value;
-            const percent = (value - 1) / 4; // de 0 a 1
-            const red = Math.round(255 * percent);
-            const green = Math.round(230 * (1 - percent));
-            const color = `rgb(${red}, ${green}, 0)`;
-            const gradPercent = value * 20;
-            slider.style.background = `linear-gradient(to right, ${color} ${gradPercent}%, #ccc ${gradPercent}%)`;
+        function redirectHome() {
+            window.location.href = "{% url 'home' %}";
         }
 
-        changeColor();
+        function redirectDashboard() {
+            window.location.href = "{% url 'dashboard' %}";
+        }
     </script>
-
+    <script src="{% static 'resultado.js' %}" defer></script>
 </body>
 {% endblock %}

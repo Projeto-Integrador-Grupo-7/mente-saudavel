@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-import login.urls
 import cadastro.urls
+import login.urls
 import home.urls
 import questionario.urls
+import resultado.urls
 import dashboard.urls
 
 urlpatterns = [
@@ -28,8 +29,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastro/', include(cadastro.urls)),
     path('login/', include(login.urls)),
-    path('questionario/', include('questionario.urls')),
-    path('dashboard/', include(dashboard.urls)),
     path('home/', include(home.urls)),
-    path('resultado/', include('resultado.urls'))
+    path('questionario/', include(questionario.urls)),
+    path('resultado/', include(resultado.urls)),
+    path('dashboard/', include(dashboard.urls))
 ]
