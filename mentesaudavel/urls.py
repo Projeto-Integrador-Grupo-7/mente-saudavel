@@ -30,4 +30,6 @@ urlpatterns = [
     path('login/', include(login.urls)),
     path('questionario/', include('questionario.urls')),
     path('dashboard/', include(dashboard.urls)),
+    path('home/', include(home.urls)),
+    path('resultado/', include('resultado.urls'))
 ]
