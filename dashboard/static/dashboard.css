@@ -1,10 +1,71 @@
+h1 {
+    margin: 0.5rem 0;
+}
+
 h1, h3, h4 {
     text-align: center;
     color: #003B6C;
 }
 
+td:last-child {
+    text-align: center;
+}
+
+button.btn {
+    width: 6rem;
+    background-color: #14558B;
+    border: none;
+}
+
+button.btn:hover {
+    background-color: #2380cc;
+    border: none;
+}
+
 .container-principal {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6rem;
+    background-color: #14558b9f;
+    font-weight: bold;
+    color: white;
+}
+
+#filter-form {
+    width: 65%;
+}
+
+.filter-campos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.filter-campos > div:not(:last-child) {
+    display: flex;
+    flex-direction: column;
+}
+
+div.filter-campos input,
+div.filter-campos select,
+div.filter-campos select:focus,
+div.filter-campos input:focus {
+    color: #003B6C;
+}
+
+.filter-buttons {
+    display: flex;
+    width: 14rem;
+    justify-content: space-between;
+}
+
+.historico-container {
+    width: 45rem;
 }

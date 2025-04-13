@@ -6,11 +6,11 @@ from datetime import datetime
 def dashboard(request):
     
     grafico_dados = get_grafico_dados()
-    historico = get_historico()
+    historico_dados = get_historico()
 
     return render(request, 'dashboard.html', {
         'grafico_dados': grafico_dados,
-        'historico': historico,
+        'historico_dados': historico_dados,
     })
 
 def get_grafico_dados():
