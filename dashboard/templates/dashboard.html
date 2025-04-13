@@ -70,7 +70,7 @@
                     <td>{{ historico.pontuacao }}</td>
                     <td>{{ historico.data }}</td>
                     <td>
-                        <button onclick="window.location.href='/'" class="btn btn-primary">Visualizar</button>
+                        <button onclick="redirectQuestionario()" class="btn btn-primary">Visualizar</button>
                     </td>
                 </tr>
                 {% endfor %}
@@ -89,4 +89,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script src="{% static 'dashboard.js' %}"></script>
+<script>
+    function redirectQuestionario() {
+            window.location.href = "{% url 'questionario' %}";
+        }
+</script>
 {% endblock %}
