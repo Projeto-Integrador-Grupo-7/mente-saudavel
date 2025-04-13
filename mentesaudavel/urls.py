@@ -20,10 +20,12 @@ from django.urls import path, include
 import login.urls
 import cadastro.urls
 import home.urls
+import dashboard.urls
 
 urlpatterns = [
     path('', include(home.urls)),
     path('admin/', admin.site.urls),
     path('cadastro/', include(cadastro.urls)),
     path('login/', include(login.urls)),
+    path('dashboard/', include(dashboard.urls)),
 ]

@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+
+<h1>Dashboard</h1>
+
+<div class="container-principal">
+    <div>
+        <h3>Histórico</h3>
+    </div>
+    <div class="grafico-container">
+        <h3>Resultado Geral</h3>
+        <h4>Respostas: {{ grafico_dados.participantes }}</h4>
+        <canvas id="graficoPizza" width="500px" height="350px"></canvas>
+    </div>
+</div>
+
+{{ grafico_dados|json_script:"graficoDadosJson" }}
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+<script src="{% static 'dashboard.js' %}"></script>
+{% endblock %}
