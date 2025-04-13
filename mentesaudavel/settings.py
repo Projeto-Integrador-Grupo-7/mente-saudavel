@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'cadastro',
     'login',
     'home',
+    'questionario',
 ]
 
 MIDDLEWARE = [

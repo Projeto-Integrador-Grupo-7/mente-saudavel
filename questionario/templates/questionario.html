@@ -1,0 +1,265 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Questionário{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'questionario.css' %}">
+
+{% if error %}
+<div role="alert" class="alert alert-danger alert-overlay">{{ error }}</div>
+{% endif %}
+
+<div class="questionario-container">
+    <h1>Como está sua saúde mental?</h1>
+
+    <form action="{% url 'cadastro_questionario' %}" method="post">
+        {% csrf_token %}
+
+        <div class="scrollable-form">
+            <div class="question">
+                <p class="p_question">1- Você tem dores de cabeça frequentes?</p>
+                <div class="form-check">
+                    <input type="radio" id="q1-sim" name="q1" value="Sim" class="form-check-input" required>
+                    <label for="q1-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check ">
+                    <input type="radio" id="q1-nao" name="q1" value="Não" class="form-check-input">
+                    <label for="q1-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">2- Tem falta de apetite?</p>
+                <div class="form-check">
+                    <input type="radio" id="q2-sim" name="q2" value="Sim" class="form-check-input" required>
+                    <label for="q2-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q2-nao" name="q2" value="Não" class="form-check-input">
+                    <label for="q2-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">3- Dorme mal?</p>
+                <div class="form-check">
+                    <input type="radio" id="q3-sim" name="q3" value="Sim" class="form-check-input" required>
+                    <label for="q3-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q3-nao" name="q3" value="Não" class="form-check-input">
+                    <label for="q3-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">4- Assusta-se com facilidade?</p>
+                <div class="form-check">
+                    <input type="radio" id="q4-sim" name="q4" value="Sim" class="form-check-input" required>
+                    <label for="q4-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q4-nao" name="q4" value="Não" class="form-check-input">
+                    <label for="q4-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">5- Tem tremores nas mãos?</p>
+                <div class="form-check">
+                    <input type="radio" id="q5-sim" name="q5" value="Sim" class="form-check-input" required>
+                    <label for="q5-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q5-nao" name="q5" value="Não" class="form-check-input">
+                    <label for="q5-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">6- Sente-se nervoso(a), tenso(a) ou preocupado(a)?</p>
+                <div class="form-check">
+                    <input type="radio" id="q6-sim" name="q6" value="Sim" class="form-check-input" required>
+                    <label for="q6-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q6-nao" name="q6" value="Não" class="form-check-input">
+                    <label for="q6-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">7- Tem má digestão?</p>
+                <div class="form-check">
+                    <input type="radio" id="q7-sim" name="q7" value="Sim" class="form-check-input" required>
+                    <label for="q7-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q7-nao" name="q7" value="Não" class="form-check-input">
+                    <label for="q7-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">8- Tem dificuldades de pensar com clareza?</p>
+                <div class="form-check">
+                    <input type="radio" id="q8-sim" name="q8" value="Sim" class="form-check-input" required>
+                    <label for="q8-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q8-nao" name="q8" value="Não" class="form-check-input">
+                    <label for="q8-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+            <div class="question">
+                <p class="p_question">9- Tem se sentido triste ultimamente?</p>
+                <div class="form-check">
+                    <input type="radio" id="q9-sim" name="q9" value="Sim" class="form-check-input" required>
+                    <label for="q9-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q9-nao" name="q9" value="Não" class="form-check-input">
+                    <label for="q9-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">10- Tem chorado mais do que de costume?</p>
+                <div class="form-check">
+                    <input type="radio" id="q10-sim" name="q10" value="Sim" class="form-check-input" required>
+                    <label for="q10-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q10-nao" name="q10" value="Não" class="form-check-input">
+                    <label for="q10-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">11- Encontra dificuldades para realizar com satisfação suas atividades diárias?</p>
+                <div class="form-check">
+                    <input type="radio" id="q11-sim" name="q11" value="Sim" class="form-check-input" required>
+                    <label for="q11-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q11-nao" name="q11" value="Não" class="form-check-input">
+                    <label for="q11-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">12- Tem dificuldades para tomar decisões?</p>
+                <div class="form-check">
+                    <input type="radio" id="q12-sim" name="q12" value="Sim" class="form-check-input" required>
+                    <label for="q12-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q12-nao" name="q12" value="Não" class="form-check-input">
+                    <label for="q12-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">13- Tem dificuldades no serviço (seu trabalho é penoso, causa-lhe sofrimento?)</p>
+                <div class="form-check">
+                    <input type="radio" id="q13-sim" name="q13" value="Sim" class="form-check-input" required>
+                    <label for="q13-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q13-nao" name="q13" value="Não" class="form-check-input">
+                    <label for="q13-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">14- É incapaz de desempenhar um papel útil em sua vida?</p>
+                <div class="form-check">
+                    <input type="radio" id="q14-sim" name="q14" value="Sim" class="form-check-input" required>
+                    <label for="q14-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q14-nao" name="q14" value="Não" class="form-check-input">
+                    <label for="q14-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">15- Tem perdido o interesse pelas coisas?</p>
+                <div class="form-check">
+                    <input type="radio" id="q15-sim" name="q15" value="Sim" class="form-check-input" required>
+                    <label for="q15-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q15-nao" name="q15" value="Não" class="form-check-input">
+                    <label for="q15-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">16- Você se sente uma pessoa inútil, sem préstimo?</p>
+                <div class="form-check">
+                    <input type="radio" id="q16-sim" name="q16" value="Sim" class="form-check-input" required>
+                    <label for="q16-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q16-nao" name="q16" value="Não" class="form-check-input">
+                    <label for="q16-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">17- Tem tido ideia de acabar com a vida?</p>
+                <div class="form-check">
+                    <input type="radio" id="q17-sim" name="q17" value="Sim" class="form-check-input" required>
+                    <label for="q17-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q17-nao" name="q17" value="Não" class="form-check-input">
+                    <label for="q17-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">18- Sente-se cansado(a) o tempo todo?</p>
+                <div class="form-check">
+                    <input type="radio" id="q18-sim" name="q18" value="Sim" class="form-check-input" required>
+                    <label for="q18-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q18-nao" name="q18" value="Não" class="form-check-input">
+                    <label for="q18-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">19- Você se cansa com facilidade?</p>
+                <div class="form-check">
+                    <input type="radio" id="q19-sim" name="q19" value="Sim" class="form-check-input" required>
+                    <label for="q19-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q19-nao" name="q19" value="Não" class="form-check-input">
+                    <label for="q19-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="p_question">20- Tem sensações desagradáveis no estômago?</p>
+                <div class="form-check">
+                    <input type="radio" id="q20-sim" name="q20" value="Sim" class="form-check-input" required>
+                    <label for="q20-sim" class="form-check-label">Sim</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="q20-nao" name="q20" value="Não" class="form-check-input">
+                    <label for="q20-nao" class="form-check-label">Não</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
+<script src="{% static 'questionario.js' %}"></script>
+{% endblock %}
