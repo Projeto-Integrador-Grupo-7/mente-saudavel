@@ -11,30 +11,36 @@
         <div class="filter-campos">
             <div class="mb-3">
                 <label for="filterDataInicio" class="form-label">Início do Período</label>
-                <input type="date" id="filterDataInicio" name="dataInicio" class="form-control">
+                <input type="date" id="filterDataInicio" name="dataInicio" class="form-control" value="{{ filtros.data_inicio }}">
             </div>
 
             <div class="mb-3">
                 <label for="filterDataFim" class="form-label">Fim do Período</label>
-                <input type="date" id="filterDataFim" name="dataFim" class="form-control">
+                <input type="date" id="filterDataFim" name="dataFim" class="form-control" value="{{ filtros.data_fim }}">
             </div>
 
             <div class="mb-3">
                 <label for="filterSexo" class="form-label">Sexo</label>
-                <select id="filterSexo" class="form-control">
-                    <option value="">Selecione</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Feminino</option>
+                <select id="filterSexo" name="sexo" class="form-select">
+                    <option value="" {% if not filtros.sexo %}selected{% endif %}>
+                        Selecione
+                    </option>
+                    <option value="M" {% if filtros.sexo == "M" %}selected{% endif %}>
+                        Masculino
+                    </option>
+                    <option value="F" {% if filtros.sexo == "F" %}selected{% endif %}>
+                        Feminino
+                    </option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="filterIdade" class="form-label">Idade</label>
-                <input type="number" id="filterIdade" name="idade" class="form-control">
+                <input type="number" id="filterIdade" name="idade" class="form-control" placeholder="Idade" min="0" value="{{ filtros.idade }}">
             </div>
 
             <div class="filter-buttons">
-                <button type="reset" class="btn btn-secondary">Limpar</button>
+                <button type="reset" id="btnLimpar" class="btn btn-secondary">Limpar</button>
                 <button type="submit" class="btn btn-primary">Filtrar</button>
             </div>
         </div>

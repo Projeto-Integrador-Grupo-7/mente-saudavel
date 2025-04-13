@@ -1,3 +1,18 @@
+class Filter {
+    onClickLimpar() {
+        const filterForm = document.getElementById('filter-form');
+    
+        filterForm.reset();
+
+        document.getElementById('filterDataInicio').value = '';
+        document.getElementById('filterDataFim').value = '';
+        document.getElementById('filterSexo').value = '';
+        document.getElementById('filterIdade').value = '';
+
+        filterForm.submit();
+    }
+}
+
 class GraficoResultado {
     onLoad() {
         const graficoDadosElement = document.getElementById("graficoDadosJson");
@@ -67,5 +82,10 @@ class GraficoResultado {
     }
 }
 
+const filter = new Filter();
 const grafico = new GraficoResultado();
 grafico.onLoad();
+
+document.getElementById('btnLimpar').addEventListener('click', () => {
+    filter.onClickLimpar();
+});
