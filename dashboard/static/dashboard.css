@@ -7,6 +7,14 @@ h1, h3, h4 {
     color: #003B6C;
 }
 
+table {
+    border: 2px solid;
+}
+
+th {
+    color: #003B6C !important;
+}
+
 td:last-child {
     text-align: center;
 }
