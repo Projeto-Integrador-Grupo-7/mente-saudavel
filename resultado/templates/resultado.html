@@ -1,0 +1,150 @@
+{% extends 'layout.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<body>
+
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .slider-container {
+            width: 80%;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right, #00e600 40%, #ccc 40%);
+            border-radius: 10px;
+            outline: none;
+            transition: background 450ms ease-in;
+            position: relative;
+        }
+
+
+        /* thumb */
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .emojis {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 22px;
+        }
+
+        .resultConainer {
+            width: 80%;
+            margin: 50px auto;
+            height: 290px;
+        }
+
+        .resultConainer>p {
+            margin-top: 50px;
+            overflow-y: auto;
+            max-height: 270px;
+        }
+
+        .containerBtns {
+            width: 80%;
+            margin: 30px auto;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .containerBtns>button {
+            margin-top: 10px;
+            background-color: #14558B;
+            border: none;
+            border-radius: 15px;
+            color: white;
+            width: 30%;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+            font-size: 17px;
+        }
+    </style>
+
+    <section>
+
+        <h1>Seu resultado</h1>
+
+        <div class="slider-container">
+            <input type="range" min="1" max="5" value="2" class="slider" id="feelingRange" onchange="changeColor()"
+                disabled="true">
+            <div class="emojis">
+                <span>😁</span>
+                <span>🙂</span>
+                <span>😐</span>
+                <span>😢</span>
+                <span>😫</span>
+            </div>
+        </div>
+
+
+        <div class="resultConainer">
+            <h3>Resultado</h3>
+
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus omnis nesciunt, maxime cumque
+                accusantium dolore. Laudantium illo amet fugiat assumenda, nemo placeat iusto est earum exercitationem
+                alias itaque eveniet neque doloremque, porro eaque ea officia saepe debitis! Autem dicta quam blanditiis
+                numquam obcaecati? Nesciunt ipsa odio fugit? Beatae mollitia quae distinctio dolor delectus praesentium
+                dolores et, veniam ex minus iure exercitationem maiores tempore similique, nobis labore, odio tenetur
+                provident amet consequatur. Molestiae, sunt voluptatem numquam fuga soluta nulla quia. Ipsam magnam
+                quia, deserunt recusandae enim dolorum! Ad autem quibusdam velit odio ducimus officia neque repellendus
+                est ipsum, sed praesentium rem natus atque expedita, possimus inventore libero reiciendis eum, alias
+
+        </div>
+
+        <div class="containerBtns">
+            <button>Voltar para o menu</button>
+            <button>Dashboard</button>
+        </div>
+    </section>
+
+    <script>
+        const slider = document.getElementById('feelingRange');
+
+        function changeColor() {
+
+            const value = slider.value;
+            const percent = (value - 1) / 4; // de 0 a 1
+            const red = Math.round(255 * percent);
+            const green = Math.round(230 * (1 - percent));
+            const color = `rgb(${red}, ${green}, 0)`;
+            const gradPercent = value * 20;
+            slider.style.background = `linear-gradient(to right, ${color} ${gradPercent}%, #ccc ${gradPercent}%)`;
+        }
+
+        changeColor();
+    </script>
+
+</body>
+{% endblock %}
