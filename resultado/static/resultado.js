@@ -1,13 +1,20 @@
 const slider = document.getElementById('feelingRange');
 
 function changeColor() {
+    const value = parseInt(slider.value, 10);
+    let color;
 
-    const value = slider.value;
-    const percent = (value - 1) / 4; // de 0 a 1
-    const red = Math.round(255 * percent);
-    const green = Math.round(230 * (1 - percent));
-    const color = `rgb(${red}, ${green}, 0)`;
-    const gradPercent = value * 20;
+    if (value === 0) {
+        color = '#ccc';
+    } else if (value >= 1 && value <= 7) {
+        color = 'green';
+    } else if (value >= 8 && value <= 14) {
+        color = 'gold';
+    } else if (value >= 15) {
+        color = 'red';
+    }
+
+    const gradPercent = (value / 20) * 100;
     slider.style.background = `linear-gradient(to right, ${color} ${gradPercent}%, #ccc ${gradPercent}%)`;
 }
 
