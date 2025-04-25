@@ -44,8 +44,7 @@ INSTALLED_APPS = [
     'home',
     'questionario',
     'resultado',
-    'dashboard',
-    'rest_framework'
+    'dashboard'
 ]
 
 MIDDLEWARE = [

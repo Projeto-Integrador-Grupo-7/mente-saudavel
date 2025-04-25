@@ -23,7 +23,6 @@ import home.urls
 import questionario.urls
 import resultado.urls
 import dashboard.urls
-import usuario.urls
 
 urlpatterns = [
     path('', include(home.urls)),
@@ -33,6 +32,5 @@ urlpatterns = [
     path('home/', include(home.urls)),
     path('questionario/', include(questionario.urls)),
     path('resultado/', include(resultado.urls)),
-    path('dashboard/', include(dashboard.urls)),
-    path('api/', include(usuario.urls))
+    path('dashboard/', include(dashboard.urls))
 ]
