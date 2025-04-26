@@ -6,8 +6,15 @@ from .models import Formulario, Resposta
 from questionario.enums import Estratificacao
 
 @login_required
-def questionario(request):
+def questionario(request, formulario_id=None):
     if request.method == 'GET':
+        if formulario_id:
+            try:
+                respostas = get_respostas(formulario_id)
+                return render(request, 'questionario.html', {'respostas': respostas})
+            except Formulario.DoesNotExist:
+                return render(request, 'questionario.html', {'error': 'Formulário não encontrado.'})
+            
         return render(request, 'questionario.html')
     
     try:
@@ -36,6 +43,19 @@ def questionario(request):
         return render(request, 'questionario.html', {
             'error': 'Não foi possível submeter o questionário.'
         })
+
+
+def get_respostas(formulario_id):
+    formulario = Formulario.objects.get(id=formulario_id)
+    query_respostas = Resposta.objects.filter(formulario=formulario).order_by('numero')
+    
+    respostas = {
+        item['numero']: item['valor']
+        for item in query_respostas.values('numero', 'valor')
+    }
+
+    return respostas
+    
 
 def get_estratificacao(pontuacao):
     if pontuacao >= 15:

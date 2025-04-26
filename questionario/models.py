@@ -1,6 +1,5 @@
 from django.db import models
-from django.utils import timezone
-from usuario.models import Usuario  # Certo importar assim
+from usuario.models import Usuario
 
 class Formulario(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)

@@ -1,21 +1,35 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from datetime import datetime
+from django.db.models import Max
+from datetime import datetime, timedelta
+from questionario.models import Formulario
+from questionario.enums import Estratificacao
 
+# region FILTROS
 class Filtros:
-    def __init__(self, data_inicio=None, data_fim=None, sexo=None, idade=None):
+    def __init__(self, usuario=None, data_inicio=None, data_fim=None, sexo=None, idade=None):
+        self.usuario = usuario
         self.data_inicio = data_inicio
         self.data_fim = data_fim
         self.sexo = sexo
         self.idade = idade
+    
+def get_filtros(request):
+    usuario_logado=request.user
+    data_inicio = request.GET.get('dataInicio')
+    data_fim = request.GET.get('dataFim')
+    sexo = request.GET.get('sexo')
+    idade = request.GET.get('idade')
+
+    return Filtros(usuario=usuario_logado, data_inicio=data_inicio, data_fim=data_fim, sexo=sexo, idade=idade)
+# endregion
 
 @login_required
 def dashboard(request):
-
     filtros = get_filtros(request)
 
-    grafico_dados = get_grafico_dados()
     historico_dados = get_historico(filtros)
+    grafico_dados = get_grafico_dados(filtros)
 
     return render(request, 'dashboard.html', {
         'grafico_dados': grafico_dados,
@@ -23,81 +37,107 @@ def dashboard(request):
         'filtros': filtros
     })
 
-def get_filtros(request):
-    data_inicio = request.GET.get('dataInicio')
-    data_fim = request.GET.get('dataFim')
-    sexo = request.GET.get('sexo')
-    idade = request.GET.get('idade')
-
-    return Filtros(data_inicio=data_inicio, data_fim=data_fim, sexo=sexo, idade=idade)
-
-def filtrar_historico(filtros, historico):
+# region HISTORICO
+def filtrar_historico(historico, filtros):
     data_inicio = filtros.data_inicio
     data_fim = filtros.data_fim
     
     if data_inicio:
         data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d')
-        historico = [h for h in historico if datetime.strptime(h['data'], '%Y-%m-%d') >= data_inicio]
+        historico = historico.filter(data_formulario__gte=data_inicio)
 
     if data_fim:
-        data_fim = datetime.strptime(data_fim, '%Y-%m-%d')
-        historico = [h for h in historico if datetime.strptime(h['data'], '%Y-%m-%d') <= data_fim]
+        data_fim = datetime.strptime(data_fim, '%Y-%m-%d') + timedelta(days=1)
+        historico = historico.filter(data_formulario__lte=data_fim)
 
-    # if sexo:
-    #     historico = [h for h in historico if h.get('sexo') == sexo]
-
-    # if idade:
-    #     idade = int(idade)
-    #     historico = [h for h in historico if h.get('idade') == idade]
+    if filtros.sexo:
+        historico = historico.filter(usuario__sexo=filtros.sexo)
 
     return historico
 
 
-def get_grafico_dados():
-    valores = [50, 600, 200, 150]
-    grafico_dados = {
-        'descricao': ['Sofrimento Grave', 'Sofrimento Moderado', 'Sofrimento Leve', 'Sem Sofrimento'],
-        'valores': valores,
-        'participantes': sum(valores)
-    }
-    return grafico_dados
-
-
 def get_historico(filtros):
-    historico = [
+    historico = Formulario.objects.filter(usuario=filtros.usuario)
+    historico = filtrar_historico(historico, filtros)
+    historico_ordenado = historico.order_by('-data_formulario')
+
+    historico_dados = [
         {
-            'estratificacao': 'Sofrimento Grave',
-            'pontuacao': 20,
-            'data': '2015-12-10'
-        },
-        {
-            'estratificacao': 'Sofrimento Leve',
-            'pontuacao': 5,
-            'data': '2024-09-15'
-        }, 
-        {
-            'estratificacao': 'Sofrimento Leve',
-            'pontuacao': 2,
-            'data': '2025-04-02'
-        },
-        {
-            'estratificacao': 'Sofrimento Moderado',
-            'pontuacao': 8,
-            'data': '2022-07-05'
-        },
-        {
-            'estratificacao': 'Sofrimento Moderado',
-            'pontuacao': 14,
-            'data': '2020-01-20'
-        },
+            'id': item['id'],
+            'estratificacao': Estratificacao(item['estratificacao']).nome_formatado,
+            'pontuacao': item['pontuacao'],
+            'data_formulario': item['data_formulario'].strftime('%d/%m/%Y %H:%M'),
+        }
+        for item in historico_ordenado.values('id', 'estratificacao', 'pontuacao', 'data_formulario')
     ]
 
-    historico = filtrar_historico(filtros, historico)
+    return list(historico_dados)
+# endregion
 
-    historico_ordenado = sorted(
-        historico,
-        key=lambda x: datetime.strptime(x['data'], '%Y-%m-%d'),
-        reverse=True
+# region GRAFICO
+def filtrar_grafico(filtros):
+    formularios = Formulario.objects.all()
+
+    data_inicio = filtros.data_inicio
+    data_fim = filtros.data_fim
+    
+    if data_inicio:
+        data_inicio = datetime.strptime(data_inicio, '%Y-%m-%d')
+        formularios = formularios.filter(data_formulario__gte=data_inicio)
+
+    if data_fim:
+        data_fim = datetime.strptime(data_fim, '%Y-%m-%d') + timedelta(days=1)
+        formularios = formularios.filter(data_formulario__lte=data_fim)
+
+    if filtros.sexo:
+        formularios = formularios.filter(usuario__sexo=filtros.sexo)
+
+    if filtros.idade:
+        idade = int(filtros.idade)
+
+        data_nascimento_max = datetime.now() - timedelta(days=idade * 365.25)
+        data_nascimento_min = data_nascimento_max - timedelta(days=365.25)
+
+        formularios = formularios.filter(
+            usuario__data_nascimento__gte=data_nascimento_min,
+            usuario__data_nascimento__lt=data_nascimento_max
+        )
+
+    formularios_atuais = get_ultimo_formulario_por_usuario(formularios)
+
+    return formularios_atuais
+
+
+def get_ultimo_formulario_por_usuario(formularios=None):
+    if formularios is None:
+        formularios = Formulario.objects.values('usuario').annotate(data_recente=Max('data_formulario'))
+    else:
+        formularios = formularios.values('usuario').annotate(data_recente=Max('data_formulario'))
+
+    formularios_mais_recentes = Formulario.objects.filter(
+        usuario__in=[f['usuario'] for f in formularios],
+        data_formulario__in=[f['data_recente'] for f in formularios]
     )
 
-    return historico_ordenado
+    return formularios_mais_recentes
+
+
+def get_grafico_dados(filtros):
+    if any([filtros.data_inicio, filtros.data_fim, filtros.sexo, filtros.idade]):
+        formularios = filtrar_grafico(filtros)
+    else:
+        formularios = get_ultimo_formulario_por_usuario()
+
+    respostas = {
+        Estratificacao.SOFRIMENTO_GRAVE.nome_formatado: formularios.filter(estratificacao=Estratificacao.SOFRIMENTO_GRAVE.value).count(),
+        Estratificacao.SOFRIMENTO_MODERADO.nome_formatado: formularios.filter(estratificacao=Estratificacao.SOFRIMENTO_MODERADO.value).count(),
+        Estratificacao.SOFRIMENTO_LEVE.nome_formatado: formularios.filter(estratificacao=Estratificacao.SOFRIMENTO_LEVE.value).count(),
+        Estratificacao.NAO_IDENTIFICADO.nome_formatado: formularios.filter(estratificacao=Estratificacao.NAO_IDENTIFICADO.value).count(),
+    }
+
+    return {
+        'descricao': list(respostas.keys()),
+        'valores': list(respostas.values()),
+        'participantes': sum(respostas.values())
+    }
+# endregion

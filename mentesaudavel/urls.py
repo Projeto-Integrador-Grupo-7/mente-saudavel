@@ -31,6 +31,7 @@ urlpatterns = [
     path('login/', include(login.urls)),
     path('home/', include(home.urls)),
     path('questionario/', include(questionario.urls)),
+    path('questionario/<int:formulario_id>', include(questionario.urls)),
     path('resultado/', include(resultado.urls)),
     path('dashboard/', include(dashboard.urls))
 ]

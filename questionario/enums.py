@@ -5,3 +5,7 @@ class Estratificacao(Enum):
     SOFRIMENTO_LEVE = 1
     SOFRIMENTO_MODERADO = 2
     SOFRIMENTO_GRAVE = 3
+
+    @property
+    def nome_formatado(self):
+        return self.name.replace('_', ' ').title()
