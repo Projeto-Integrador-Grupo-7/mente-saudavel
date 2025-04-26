@@ -1,36 +1,48 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from .models import Formulario, Resposta
-from usuario.models import Usuario  # Ou seu modelo CustomUser
 from django.utils import timezone
+from .models import Formulario, Resposta
+from questionario.enums import Estratificacao
 
+@login_required
 def questionario(request):
-    return render(request, 'questionario.html')
-
-def cadastro_questionario(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'questionario.html')
+    
+    try:
         respostas = {pergunta: resposta for pergunta, resposta in request.POST.items() if pergunta.startswith('q')}
         pontuacao = sum(1 for resposta in respostas.values() if resposta == 'S')
 
-        # Cria o Formulário
         formulario = Formulario.objects.create(
-            usuario=request.user,  # Aqui precisa estar logado! Se não quiser obrigatório, avisa que ajustamos
+            usuario=request.user,
             pontuacao=pontuacao,
-            estratificacao=0,  # Você pode calcular a estratificação depois, se quiser
+            estratificacao=get_estratificacao(pontuacao),
             data_formulario=timezone.now()
         )
 
-        # Salva as respostas
         for numero, valor in respostas.items():
-            numero_int = int(numero[1:])  # Remove o 'q' do começo ('q1' -> 1)
+            numero_int = int(numero[1:])
             Resposta.objects.create(
                 formulario=formulario,
                 numero=numero_int,
-                valor=1 if valor == 'S' else 0  # Valor como tinyint: 1 para 'S', 0 para 'N'
+                valor=1 if valor == 'S' else 0
             )
 
-        # Redireciona para a página de resultado com a pontuação
         url_resultado = f"{reverse('resultado')}?pontuacao={pontuacao}"
         return redirect(url_resultado)
+    
+    except Exception:
+        return render(request, 'questionario.html', {
+            'error': 'Não foi possível submeter o questionário.'
+        })
 
-    return render(request, 'questionario.html')
+def get_estratificacao(pontuacao):
+    if pontuacao >= 15:
+        return Estratificacao.SOFRIMENTO_GRAVE.value
+    elif 8 <= pontuacao <= 14:
+        return Estratificacao.SOFRIMENTO_MODERADO.value
+    elif 1 <= pontuacao <= 7:
+        return Estratificacao.SOFRIMENTO_LEVE.value
+    else:
+        return Estratificacao.NAO_IDENTIFICADO.value

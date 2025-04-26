@@ -13,7 +13,7 @@
 <div class="questionario-container">
     <h1>Como está sua saúde mental?</h1>
 
-    <form action="{% url 'cadastro_questionario' %}" method="post">
+    <form action="{% url 'questionario' %}" method="post">
         {% csrf_token %}
 
         <div class="scrollable-form">
