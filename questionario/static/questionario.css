@@ -37,7 +37,7 @@ body {
     margin-bottom: 0.5rem;
 }
 
-#btnEnviar {
+#btnEnviar, #btnDashboard {
     display: block;
     margin: 25px auto 0;
     padding: 12px 25px;
