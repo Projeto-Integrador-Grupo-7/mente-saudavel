@@ -18,6 +18,11 @@ class GraficoResultado {
         const graficoDadosElement = document.getElementById("graficoDadosJson");
         const graficoDados = JSON.parse(graficoDadosElement.textContent);
 
+        if (graficoDados.valores.every(valor => valor === 0)) {
+            document.getElementById('graficoContainer').style.display = 'none';
+            return;
+        }
+
         const canvasContext = document.getElementById('graficoPizza').getContext('2d');
         new Chart(canvasContext, {
             type: 'pie',
