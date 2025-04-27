@@ -36,7 +36,7 @@ def questionario(request, formulario_id=None):
                 valor=1 if valor == 'S' else 0
             )
 
-        url_resultado = f"{reverse('resultado')}?pontuacao={pontuacao}"
+        url_resultado = f"{reverse('resultado')}?pontuacao={pontuacao}&estratificacao={formulario.estratificacao}"
         return redirect(url_resultado)
     
     except Exception:

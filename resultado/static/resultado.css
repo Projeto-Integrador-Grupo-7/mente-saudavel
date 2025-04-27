@@ -51,10 +51,12 @@ h1 {
     height: 290px;
 }
 
-.resultConainer>p {
-    margin-top: 50px;
+.resultConainer > p {
+    margin-top: 2rem;
     overflow-y: auto;
     max-height: 270px;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
 }
 
 .containerBtns {

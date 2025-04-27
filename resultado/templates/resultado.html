@@ -25,16 +25,49 @@
 
 
         <div class="resultConainer">
-            <h3>Resultado</h3>
+            <h2>{{ estratificacao }}</h2>
 
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus omnis nesciunt, maxime cumque
-                accusantium dolore. Laudantium illo amet fugiat assumenda, nemo placeat iusto est earum exercitationem
-                alias itaque eveniet neque doloremque, porro eaque ea officia saepe debitis! Autem dicta quam blanditiis
-                numquam obcaecati? Nesciunt ipsa odio fugit? Beatae mollitia quae distinctio dolor delectus praesentium
-                dolores et, veniam ex minus iure exercitationem maiores tempore similique, nobis labore, odio tenetur
-                provident amet consequatur. Molestiae, sunt voluptatem numquam fuga soluta nulla quia. Ipsam magnam
-                quia, deserunt recusandae enim dolorum! Ad autem quibusdam velit odio ducimus officia neque repellendus
-                est ipsum, sed praesentium rem natus atque expedita, possimus inventore libero reiciendis eum, alias
+            {% if estratificacao == enum_estratificacao.NAO_IDENTIFICADO %}
+                <p>
+                    Parabéns! Seu resultado indica que, no momento, não há sinais relevantes de sofrimento mental. 
+                    <br>Continue cuidando de sua saúde emocional e física. 
+                    Mantenha práticas saudáveis no seu dia a dia, como momentos de lazer, boa alimentação, 
+                    atividades físicas e bons relacionamentos. 
+                    <br>Se, em algum momento, você sentir necessidade, 
+                    saiba que buscar ajuda profissional é sempre uma atitude de autocuidado.
+                </p>
+                {% endif %}
+
+                {% if estratificacao == enum_estratificacao.SOFRIMENTO_LEVE %}
+                <p>
+                    Seu resultado indica sinais leves de sofrimento mental. 
+                    Mesmo que ainda não seja algo grave, é importante estar atento(a) a si mesmo(a). 
+                    <br>Procure cuidar da sua rotina emocional: pratique atividades que tragam bem-estar, reserve tempo para você e, 
+                    se possível, converse com pessoas de confiança sobre como se sente. 
+                    <br>Se o desconforto persistir ou aumentar, buscar apoio psicológico pode ser muito benéfico.
+                </p>
+                {% endif %}
+
+                {% if estratificacao == enum_estratificacao.SOFRIMENTO_MODERADO %}
+                <p>
+                    Seu resultado indica sinais moderados de sofrimento mental.
+                    <br>Esse é um sinal de que seu bem-estar emocional precisa de atenção. 
+                    Considere procurar um(a) psicólogo(a) para conversar e receber orientação.
+                    Ter alguém capacitado para ajudar nesse momento pode fazer toda a diferença.  
+                    <br>Não deixe seus sentimentos de lado: cuidar da saúde mental é tão importante quanto cuidar da saúde física.
+                </p>
+                {% endif %}
+
+                {% if estratificacao == enum_estratificacao.SOFRIMENTO_GRAVE %}
+                <p>
+                    Seu resultado aponta sinais graves de sofrimento mental. 
+                    Sabemos que pode ser difícil enfrentar momentos assim, mas é importante lembrar que você não está sozinho(a). 
+                    <br>Recomendamos que procure o quanto antes o apoio de um(a) profissional da saúde mental, como um(a) psicólogo(a) ou psiquiatra. 
+                    Eles poderão ouvir você com acolhimento e indicar os melhores caminhos para seu tratamento e recuperação. 
+                    <br>Pedir ajuda é um ato de coragem e autocuidado. 
+                    Você merece atenção, cuidado e apoio.
+                </p>
+            {% endif %}
 
         </div>
 
