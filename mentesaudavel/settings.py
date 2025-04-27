@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'home',
     'questionario',
     'resultado',
-    'dashboard'
+    'dashboard',
+    'relatorio'
 ]
 
 MIDDLEWARE = [

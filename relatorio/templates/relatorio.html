@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Questionário{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'relatorio.css' %}">
+
+<div class="relatorio-container">
+    <h1>Relatório</h1>
+    <p>
+        O último questionário submetido foi no dia <strong>{{ formulario.data_formulario }}</strong>. <br>
+        Nele, você obteve <strong>{{ formulario.pontuacao }} pontos</strong>, 
+        equivalente à estratificação <strong>{{ formulario.estratificacao }}</strong>.
+    </p>
+
+    {% if formulario.estratificacao == enum_estratificacao.NAO_IDENTIFICADO %}
+    <p>
+        Parabéns! Seu resultado indica que, no momento, não há sinais relevantes de sofrimento mental. 
+        <br>Continue cuidando de sua saúde emocional e física. 
+        Mantenha práticas saudáveis no seu dia a dia, como momentos de lazer, boa alimentação, 
+        atividades físicas e bons relacionamentos. 
+        <br>Se, em algum momento, você sentir necessidade, 
+        saiba que buscar ajuda profissional é sempre uma atitude de autocuidado.
+    </p>
+    {% endif %}
+
+    {% if formulario.estratificacao == enum_estratificacao.SOFRIMENTO_LEVE %}
+    <p>
+        Seu resultado indica sinais leves de sofrimento mental. 
+        Mesmo que ainda não seja algo grave, é importante estar atento(a) a si mesmo(a). 
+        <br>Procure cuidar da sua rotina emocional: pratique atividades que tragam bem-estar, reserve tempo para você e, 
+        se possível, converse com pessoas de confiança sobre como se sente. 
+        <br>Se o desconforto persistir ou aumentar, buscar apoio psicológico pode ser muito benéfico.
+    </p>
+    {% endif %}
+
+    {% if formulario.estratificacao == enum_estratificacao.SOFRIMENTO_MODERADO %}
+    <p>
+        Seu resultado indica sinais moderados de sofrimento mental.
+        <br>Esse é um sinal de que seu bem-estar emocional precisa de atenção. 
+        Considere procurar um(a) psicólogo(a) para conversar e receber orientação.
+        Ter alguém capacitado para ajudar nesse momento pode fazer toda a diferença.  
+        <br>Não deixe seus sentimentos de lado: cuidar da saúde mental é tão importante quanto cuidar da saúde física.
+    </p>
+    {% endif %}
+
+    {% if formulario.estratificacao == enum_estratificacao.SOFRIMENTO_GRAVE %}
+    <p>
+        Seu resultado aponta sinais graves de sofrimento mental. 
+        Sabemos que pode ser difícil enfrentar momentos assim, mas é importante lembrar que você não está sozinho(a). 
+        <br>Recomendamos que procure o quanto antes o apoio de um(a) profissional da saúde mental, como um(a) psicólogo(a) ou psiquiatra. 
+        Eles poderão ouvir você com acolhimento e indicar os melhores caminhos para seu tratamento e recuperação. 
+        <br>Pedir ajuda é um ato de coragem e autocuidado. 
+        Você merece atenção, cuidado e apoio.
+    </p>
+    {% endif %}
+
+    <div class="btn-dashboard-container">
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">Voltar para Dashboard</a>
+    </div>
+</div>
+
+{% endblock %}

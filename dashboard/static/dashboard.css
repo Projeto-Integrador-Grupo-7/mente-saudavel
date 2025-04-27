@@ -77,3 +77,15 @@ div.filter-campos input:focus {
 .historico-container {
     width: 45rem;
 }
+
+.btn-relatorio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.btn-relatorio-container > a {
+    width: auto;
+    height: 2.5rem;
+}

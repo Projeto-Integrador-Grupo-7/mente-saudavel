@@ -1,0 +1,36 @@
+.relatorio-container {
+    max-width: 700px;
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: #e8f0ff;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    margin: 50px auto;
+}
+
+h1 {
+    text-align: center;
+    color: #003B6C;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    color: #003B6C;
+}
+
+.btn-dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+a.btn {
+    background-color: #14558B;
+    border: none;
+}
+
+a.btn:hover {
+    background-color: #2380cc;
+    border: none;
+}
