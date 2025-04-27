@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.db.models import Max
+from django.utils.timezone import localtime
 from datetime import datetime, timedelta
 from questionario.models import Formulario
 from questionario.enums import Estratificacao
@@ -66,7 +67,7 @@ def get_historico(filtros):
             'id': item['id'],
             'estratificacao': Estratificacao(item['estratificacao']).nome_formatado,
             'pontuacao': item['pontuacao'],
-            'data_formulario': item['data_formulario'].strftime('%d/%m/%Y %H:%M'),
+            'data_formulario': localtime(item['data_formulario']).strftime('%d/%m/%Y %H:%M'),
         }
         for item in historico_ordenado.values('id', 'estratificacao', 'pontuacao', 'data_formulario')
     ]
