@@ -21,13 +21,6 @@ td:last-child {
 
 button.btn, a.btn {
     width: 6rem;
-    background-color: #14558B;
-    border: none;
-}
-
-button.btn:hover, a.btn:hover {
-    background-color: #2380cc;
-    border: none;
 }
 
 .container-principal {

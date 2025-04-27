@@ -47,3 +47,13 @@ a.navbar-brand {
     transform: translateX(-50%);
     z-index: 9999;
 }
+
+button.btn, a.btn {
+    background-color: #14558B;
+    border: none;
+}
+
+button.btn:hover, a.btn:hover {
+    background-color: #2380cc;
+    border: none;
+}

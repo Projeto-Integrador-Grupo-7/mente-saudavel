@@ -538,7 +538,7 @@
         </div>
 
         {% if not respostas %}
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button id="btnEnviar" type="submit" class="btn btn-primary">Enviar</button>
         {% endif %}
         {% if respostas %}
         <a href="{% url 'dashboard' %}" class="btn btn-primary">Voltar para Dashboard</a>

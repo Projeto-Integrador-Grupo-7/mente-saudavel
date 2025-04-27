@@ -69,6 +69,7 @@ h2 {
 .card-btn:hover {
     background-color: #0f3f6a;
 }
+
 .card p {
     flex-grow: 1;
     margin-bottom: 1rem;

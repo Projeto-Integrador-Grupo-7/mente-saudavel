@@ -24,13 +24,3 @@ p {
     align-items: center;
     margin-top: 3rem;
 }
-
-a.btn {
-    background-color: #14558B;
-    border: none;
-}
-
-a.btn:hover {
-    background-color: #2380cc;
-    border: none;
-}

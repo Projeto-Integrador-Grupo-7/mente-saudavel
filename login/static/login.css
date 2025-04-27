@@ -16,13 +16,6 @@ form {
 
 button[type="submit"] {
     width: 100%;
-    background-color: #14558B;
-    border: none;
-}
-
-button[type="submit"]:hover {
-    background-color: #2380cc;
-    border: none;
 }
 
 span {
