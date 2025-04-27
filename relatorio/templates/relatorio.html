@@ -8,6 +8,7 @@
 
 <div class="relatorio-container">
     <h1>Relatório</h1>
+    {% if formulario %}
     <p>
         O último questionário submetido foi no dia <strong>{{ formulario.data_formulario }}</strong>. <br>
         Nele, você obteve <strong>{{ formulario.pontuacao }} pontos</strong>, 
@@ -53,6 +54,13 @@
         Eles poderão ouvir você com acolhimento e indicar os melhores caminhos para seu tratamento e recuperação. 
         <br>Pedir ajuda é um ato de coragem e autocuidado. 
         Você merece atenção, cuidado e apoio.
+    </p>
+    {% endif %}
+    {% endif %}
+    {% if not formulario %}
+    <p>
+        Você ainda não submeteu nenhum questionário.
+        <br>Para visualizar o relatório, preencha o questionário disponível na aba <a href="{% url 'questionario' %}">Questionário</a>.
     </p>
     {% endif %}
 
