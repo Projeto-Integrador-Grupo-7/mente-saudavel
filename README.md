@@ -1,4 +1,4 @@
-# Sistema Mente Saudável
+# Sistema Mente Saudável (Python)
 
 ## Instalar:
 ```
